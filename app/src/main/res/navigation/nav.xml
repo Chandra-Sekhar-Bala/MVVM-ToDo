@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/showTodo">
+    <fragment
+        android:id="@+id/showTodo"
+        android:name="com.sekhar.todo.app.showTodo.ShowTodo"
+        android:label="fragment_show_todo"
+        tools:layout="@layout/fragment_show_todo" >
+        <action
+            android:id="@+id/action_showTodo_to_addTodo"
+            app:destination="@id/addTodo" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTodo"
+        android:name="com.sekhar.todo.app.addEditTodo.Add_edit_Todo"
+        android:label="fragment_add_todo"
+        tools:layout="@layout/fragment_add_todo" >
+        <action
+            android:id="@+id/action_addTodo_to_showTodo"
+            app:destination="@id/showTodo" />
+    </fragment>
+</navigation>
