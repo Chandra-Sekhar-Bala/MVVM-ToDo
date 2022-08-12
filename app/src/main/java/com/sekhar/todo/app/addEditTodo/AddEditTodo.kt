@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.sekhar.todo.app.R
 import com.sekhar.todo.app.databinding.FragmentAddTodoBinding
 import com.sekhar.todo.app.repo.db.DAO
@@ -21,6 +22,7 @@ import kotlinx.coroutines.withContext
 class AddEditTodo : Fragment() {
     private lateinit var bind : FragmentAddTodoBinding
     private lateinit var dao : DAO
+    private lateinit var args: AddEditTodoArgs
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,12 +37,31 @@ class AddEditTodo : Fragment() {
     }
 
     private fun initialize() {
+        // set up as per navArgs
+        args = AddEditTodoArgs.fromBundle(requireArguments())
+        var title = ""
 
-        // Setting Title
-        (activity as AppCompatActivity).supportActionBar!!.title = "Add new Todo"
+        if(args.todoModel == null) {
+            title = "Add new Todo"
+        }else{
+            // set up data
+            title = "Update your Todo"
+            fillUpData(args.todoModel!!.subject!!)
+        }
+        (activity as AppCompatActivity).supportActionBar!!.title = title
 
         val application = requireNotNull(this.activity).application
         dao = DB.getInstance(application).todoDAO
+
+    }
+
+    private fun fillUpData(text: String) {
+        // fill up to-do
+        bind.editTextTodo.setText(text)
+
+        // change tag for click listener
+        bind.saveTodo.tag = getString(R.string.update)
+        bind.saveTodo.text = getString(R.string.update)
 
     }
 
@@ -48,13 +69,40 @@ class AddEditTodo : Fragment() {
         super.onResume()
 
         bind.saveTodo.setOnClickListener{
+            // validate data:
             if(validate()){
+                // if clicked for save
+                val textData = bind.editTextTodo.text.toString().trim()
 
-                saveData(bind.editTextTodo.text.toString().trim())
+                if(bind.saveTodo.tag == getString(R.string.save)) {
+                    saveData(textData)
+                }else{
+                    // clicked for update
+                    updateData(textData)
+                }
             }
         }
 
     }
+
+    private fun updateData(title : String) {
+        // update title and move on
+        args.todoModel?.subject = title
+        GlobalScope.launch {
+            dao.update(args.todoModel!!)
+            
+            withContext(Dispatchers.Main){
+                Toast.makeText(requireContext(), "Todo Updated 🤝🏽", Toast.LENGTH_SHORT).show()
+                onBackPressed()
+
+            }
+        }
+    }
+
+    private fun onBackPressed(){
+        view?.findNavController()!!.navigate(AddEditTodoDirections.actionAddTodoToShowTodo())
+    }
+
 
     private fun saveData(item : String){
         val data = TodoModel(subject = item)
@@ -64,10 +112,9 @@ class AddEditTodo : Fragment() {
             dao.insert(data)
 
             withContext(Dispatchers.Main){
-                Toast.makeText(requireContext(), "Todo Saved", Toast.LENGTH_SHORT).show()
-                bind.editTextTodo.text?.clear()
+                Toast.makeText(requireContext(), "Todo Saved 🤭", Toast.LENGTH_SHORT).show()
+                onBackPressed()
             }
-
         }
     }
 
@@ -83,5 +130,4 @@ class AddEditTodo : Fragment() {
 
         return flag
     }
-
 }

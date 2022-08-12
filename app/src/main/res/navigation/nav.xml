@@ -13,11 +13,16 @@
             android:id="@+id/action_showTodo_to_addTodo"
             app:destination="@id/addTodo" />
     </fragment>
+
     <fragment
         android:id="@+id/addTodo"
         android:name="com.sekhar.todo.app.addEditTodo.AddEditTodo"
         android:label="fragment_add_todo"
-        tools:layout="@layout/fragment_add_todo" >
+        tools:layout="@layout/fragment_add_todo">
+        <argument
+            android:name="TodoModel"
+            app:argType="com.sekhar.todo.app.repo.db.TodoModel"
+            app:nullable="true" />
         <action
             android:id="@+id/action_addTodo_to_showTodo"
             app:destination="@id/showTodo" />

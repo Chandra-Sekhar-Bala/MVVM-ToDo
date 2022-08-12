@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import com.sekhar.todo.app.R
 import com.sekhar.todo.app.databinding.FragmentShowTodoBinding
 import com.sekhar.todo.app.repo.db.DB
+import com.sekhar.todo.app.repo.db.TodoModel
 import com.sekhar.todo.app.showTodo.adapter.TodoAdapter
 
 
@@ -37,6 +38,8 @@ class ShowTodo : Fragment() , TodoAdapter.OnDoneClickedListener {
     }
 
     private fun initialize() {
+        // title :
+        (activity as AppCompatActivity).supportActionBar!!.title = "To-do"
         // no options for now
         setHasOptionsMenu(false)
         // getting ready to pass viewModel
@@ -58,7 +61,7 @@ class ShowTodo : Fragment() , TodoAdapter.OnDoneClickedListener {
 
         // add new To-Do
         bind.addTodo.setOnClickListener{
-            requireView().findNavController().navigate(R.id.action_showTodo_to_addTodo)
+            requireView().findNavController().navigate(ShowTodoDirections.actionShowTodoToAddTodo(null))
         }
 
         // observing All Todos from DB
@@ -69,9 +72,11 @@ class ShowTodo : Fragment() , TodoAdapter.OnDoneClickedListener {
 
     // when Done button is clicked : Delete From DB
     override fun onDoneClicked(id: Int) {
-        Toast.makeText(requireContext(), "Clicked on $id", Toast.LENGTH_SHORT).show()
-//        viewModel.deleteItem(id)
-        deleteTodo(id)
+           deleteTodo(id)
+    }
+
+    override fun onItemClicked(data: TodoModel) {
+        requireView().findNavController().navigate(ShowTodoDirections.actionShowTodoToAddTodo(data))
     }
 
     private fun deleteTodo(id: Int){

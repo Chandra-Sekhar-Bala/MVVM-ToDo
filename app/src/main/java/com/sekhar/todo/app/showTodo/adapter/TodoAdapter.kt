@@ -21,19 +21,27 @@ class TodoAdapter(private var listener: OnDoneClickedListener) : ListAdapter<Tod
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val data = getItem(position)
         holder.titleText.text = data.subject
-        // callback to UI
+
+        // To-do done clicked : callback to UI
         holder.done.setOnClickListener{
             listener.onDoneClicked(data.TodoID)
+        }
+        // Item clicked to update : callback to UI
+        holder.itemView.setOnClickListener{
+            listener.onItemClicked(data)
         }
     }
 
     class TodoViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+
         val titleText = itemView.findViewById(R.id.todo_title) as TextView
         val done = itemView.findViewById(R.id.todo_done) as ImageView
+
     }
 
     interface OnDoneClickedListener{
         fun onDoneClicked(id: Int)
+        fun onItemClicked(data : TodoModel)
     }
 
     // callback for Data changing

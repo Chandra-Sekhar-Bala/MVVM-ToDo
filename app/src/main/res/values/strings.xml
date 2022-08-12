@@ -2,4 +2,7 @@
     <string name="app_name">To-Do</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save_todo">Save TODO</string>
+    <string name="save">Save</string>
+    <string name="update">Update</string>
 </resources>
