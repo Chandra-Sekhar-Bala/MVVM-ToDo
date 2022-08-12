@@ -4,27 +4,52 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.sekhar.todo.app.R
 import com.sekhar.todo.app.databinding.FragmentShowTodoBinding
+import com.sekhar.todo.app.repo.db.DB
+import com.sekhar.todo.app.showTodo.adapter.TodoAdapter
 
-class ShowTodo : Fragment() {
+class ShowTodo : Fragment() , TodoAdapter.OnDoneClickedListener {
+
     private lateinit var bind : FragmentShowTodoBinding
+    private lateinit var viewModel: TodoViewModel
+    private lateinit var adapter : TodoAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
         // Inflate the layout for this fragment
         bind = DataBindingUtil.inflate(inflater, R.layout.fragment_show_todo, container, false)
 
-        // no menu option for now
-        setHasOptionsMenu(true)
+        // initialize
+        initialize()
 
         return bind.root
     }
+
+    private fun initialize() {
+        // no options for now
+        setHasOptionsMenu(false)
+        // getting ready to pass viewModel
+        val application = requireNotNull(this.activity).application
+        val datasource = DB.getInstance(application).todoDAO
+
+        val viewModelFactory = TodoViewModelFactory(datasource)
+        viewModel = ViewModelProvider(this, viewModelFactory)[TodoViewModel::class.java]
+
+        // setting recyclerview with adapter
+        adapter = TodoAdapter(this)
+        bind.recyclerView.adapter = adapter
+
+    }
+
 
     override fun onResume() {
         super.onResume()
@@ -33,5 +58,16 @@ class ShowTodo : Fragment() {
         bind.addTodo.setOnClickListener{
             requireView().findNavController().navigate(R.id.action_showTodo_to_addTodo)
         }
+
+        // observing All Todos from DB
+        viewModel.getAllTodo().observe(this) {
+            adapter.submitList(it)
+        }
+    }
+
+    // when Done button is clicked : Delete From DB
+    override fun onDoneClicked(id: Int) {
+        Toast.makeText(requireContext(), "Clicked on $id", Toast.LENGTH_SHORT).show()
+        viewModel.deleteItem(id)
     }
 }
