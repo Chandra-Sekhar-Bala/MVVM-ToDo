@@ -1,5 +1,6 @@
 package com.sekhar.todo.app.showTodo
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.sekhar.todo.app.R
 import com.sekhar.todo.app.databinding.FragmentShowTodoBinding
 import com.sekhar.todo.app.repo.db.DB
 import com.sekhar.todo.app.showTodo.adapter.TodoAdapter
+
 
 class ShowTodo : Fragment() , TodoAdapter.OnDoneClickedListener {
 
@@ -68,6 +70,22 @@ class ShowTodo : Fragment() , TodoAdapter.OnDoneClickedListener {
     // when Done button is clicked : Delete From DB
     override fun onDoneClicked(id: Int) {
         Toast.makeText(requireContext(), "Clicked on $id", Toast.LENGTH_SHORT).show()
-        viewModel.deleteItem(id)
+//        viewModel.deleteItem(id)
+        deleteTodo(id)
+    }
+
+    private fun deleteTodo(id: Int){
+
+        AlertDialog.Builder(context)
+            .setTitle("Todo done?")
+            .setMessage("Delete this as you've completed it bro?")
+            .setPositiveButton(android.R.string.yes
+            ) { _, _ ->
+                // Yes clicked  to delete bro
+             viewModel.deleteItem(id)
+
+            }.setNegativeButton(android.R.string.no, null)
+            .setIcon(R.drawable.delete_icon)
+            .show()
     }
 }
