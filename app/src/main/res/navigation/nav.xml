@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/addTodo"
-        android:name="com.sekhar.todo.app.addEditTodo.Add_edit_Todo"
+        android:name="com.sekhar.todo.app.addEditTodo.AddEditTodo"
         android:label="fragment_add_todo"
         tools:layout="@layout/fragment_add_todo" >
         <action
