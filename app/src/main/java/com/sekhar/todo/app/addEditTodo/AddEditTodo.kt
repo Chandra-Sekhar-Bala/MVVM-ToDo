@@ -89,15 +89,16 @@ class AddEditTodo : Fragment() {
         // if to-do wasn't updated then no need to update
         if(args.todoModel?.subject == title)
             onBackPressed()
+        else {
+            // update title and move on
+            args.todoModel?.subject = title
+            GlobalScope.launch {
+                dao.update(args.todoModel!!)
 
-        // update title and move on
-        args.todoModel?.subject = title
-        GlobalScope.launch {
-            dao.update(args.todoModel!!)
-            
-            withContext(Dispatchers.Main){
-                Toast.makeText(requireContext(), "Todo Updated 🤝🏽", Toast.LENGTH_SHORT).show()
-                onBackPressed()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Todo Updated 🤝🏽", Toast.LENGTH_SHORT).show()
+                    onBackPressed()
+                }
             }
         }
     }
