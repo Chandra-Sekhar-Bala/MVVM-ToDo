@@ -86,6 +86,10 @@ class AddEditTodo : Fragment() {
     }
 
     private fun updateData(title : String) {
+        // if to-do wasn't updated then no need to update
+        if(args.todoModel?.subject == title)
+            onBackPressed()
+
         // update title and move on
         args.todoModel?.subject = title
         GlobalScope.launch {
@@ -94,7 +98,6 @@ class AddEditTodo : Fragment() {
             withContext(Dispatchers.Main){
                 Toast.makeText(requireContext(), "Todo Updated 🤝🏽", Toast.LENGTH_SHORT).show()
                 onBackPressed()
-
             }
         }
     }
