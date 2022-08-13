@@ -5,9 +5,9 @@
       <map>
         <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/activity_main.xml" value="0.15934065934065933" />
         <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/fragment_add_todo.xml" value="0.1828125" />
-        <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/fragment_show_todo.xml" value="0.1" />
+        <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/fragment_show_todo.xml" value="0.22" />
         <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/item_todo.xml" value="0.1828125" />
-        <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/list_item_todo.xml" value="0.4466666666666667" />
+        <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/list_item_todo.xml" value="0.22" />
       </map>
     </option>
   </component>

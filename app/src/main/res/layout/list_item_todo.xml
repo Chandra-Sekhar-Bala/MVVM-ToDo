@@ -10,15 +10,15 @@
         android:id="@+id/todo_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/amaranth"
         android:layout_marginVertical="4dp"
+        android:fontFamily="sans-serif"
         android:padding="8dp"
-        tools:text="Complete Todo app by this week"
-        android:textSize="20sp"
-        android:textColor="#3E3737"
+        android:layout_marginStart="10dp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/todo_done"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Complete Todo app by this week" />
 
     <ImageView
         android:id="@+id/todo_done"
@@ -33,7 +33,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.3dp"
+        android:layout_height="0.1dp"
         android:layout_marginHorizontal="10dp"
         android:background="@color/grey"
         android:layout_marginTop="6dp"
