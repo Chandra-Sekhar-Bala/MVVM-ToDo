@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.sekhar.todo.app.motivation.Motivation
+import com.sekhar.todo.app.motivation.MotivationActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity() {
          }
         }
     }
-    // move to motivation screen:
+    // move to Motivation screen:
     private fun showMotivation() {
-        startActivity(Intent(this@MainActivity, Motivation::class.java))
+        startActivity(Intent(this@MainActivity, MotivationActivity::class.java))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
