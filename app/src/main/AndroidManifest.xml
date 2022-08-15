@@ -15,7 +15,7 @@
         android:theme="@style/Theme.ToDo"
         tools:targetApi="31">
         <activity
-            android:name=".motivation.MotivationActivity"
+            android:name=".ShowMotivation.MotivationActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

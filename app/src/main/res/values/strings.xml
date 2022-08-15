@@ -5,4 +5,5 @@
     <string name="save_todo">Save TODO</string>
     <string name="save">Save</string>
     <string name="update">Update</string>
+    <string name="author">By: %s"</string>
 </resources>
