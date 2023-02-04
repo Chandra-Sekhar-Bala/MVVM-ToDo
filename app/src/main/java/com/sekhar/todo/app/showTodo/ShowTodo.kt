@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.sekhar.todo.app.R
 import com.sekhar.todo.app.databinding.FragmentShowTodoBinding
 import com.sekhar.todo.app.repo.db.DB
@@ -58,14 +60,17 @@ class ShowTodo : Fragment() , TodoAdapter.OnDoneClickedListener {
 
     override fun onResume() {
         super.onResume()
+        //fetch all todos
+        viewModel.fetchTodos()
 
+        bind.recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         // add new To-Do
         bind.addTodo.setOnClickListener{
             requireView().findNavController().navigate(ShowTodoDirections.actionShowTodoToAddTodo(null))
         }
 
         // observing All Todos from DB
-        viewModel.getAllTodo().observe(this) {
+        viewModel.todoData.observe(this) {
             adapter.submitList(it)
         }
     }

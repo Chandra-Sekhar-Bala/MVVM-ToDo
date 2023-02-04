@@ -4,17 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Programming/Android/ToDo/app/src/main/res/drawable/motivation.xml" value="0.13" />
+        <entry key="..\:/Programming/Android/ToDo/app/src/main/res/drawable/plus.xml" value="0.1" />
+        <entry key="..\:/Programming/Android/ToDo/app/src/main/res/drawable/todo_bg.xml" value="0.1" />
         <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/activity_main.xml" value="0.15934065934065933" />
-        <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/activity_motivation.xml" value="0.16666666666666666" />
+        <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/activity_motivation.xml" value="0.13333333333333333" />
         <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/fragment_add_todo.xml" value="0.1828125" />
-        <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/fragment_show_todo.xml" value="0.22" />
+        <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/fragment_show_todo.xml" value="0.16666666666666666" />
         <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/item_todo.xml" value="0.1828125" />
         <entry key="..\:/Programming/Android/ToDo/app/src/main/res/layout/list_item_todo.xml" value="0.22" />
         <entry key="..\:/Programming/Android/ToDo/app/src/main/res/menu/menu.xml" value="0.22" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

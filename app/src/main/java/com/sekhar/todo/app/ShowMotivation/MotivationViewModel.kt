@@ -1,5 +1,6 @@
 package com.sekhar.todo.app.ShowMotivation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,7 +34,7 @@ class MotivationViewModel : ViewModel() {
         getMotivationQuotes()
     }
 
-    private fun getMotivationQuotes() {
+    fun getMotivationQuotes() {
 
         _status.value= ApiStatus.LOADING
 
@@ -51,11 +52,16 @@ class MotivationViewModel : ViewModel() {
 
                 _status.value= ApiStatus.DONE
             }catch (e : Exception){
+                Log.e("ERROR", "Error: "+e.message)
                 error.value = "Error getting motivation 😥"
                 _status.value= ApiStatus.ERROR
             }
         }
 
+        /*****
+         *
+         * OLD WAY:
+         */
 //        MotivationApi.retrofitService.getMotivation().enqueue(object:retrofit2.Callback<List<Motivation>> {
 //
 //            // HTTP response

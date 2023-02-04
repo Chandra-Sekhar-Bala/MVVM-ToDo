@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.sekhar.todo.app.R
 import com.sekhar.todo.app.databinding.ActivityMotivationBinding
+
 class MotivationActivity : AppCompatActivity() {
 
     private  lateinit var bind : ActivityMotivationBinding
     private lateinit var viewModel: MotivationViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityMotivationBinding.inflate(layoutInflater)
@@ -20,6 +22,12 @@ class MotivationActivity : AppCompatActivity() {
         super.onResume()
 
         viewModel = ViewModelProvider(this)[MotivationViewModel::class.java]
+
+        // swipe refresh
+
+        bind.swipeRefresh.setOnRefreshListener {
+            viewModel.getMotivationQuotes()
+        }
 
         // quote response message observer
         viewModel.quote.observe(this){ quote ->
@@ -39,6 +47,7 @@ class MotivationActivity : AppCompatActivity() {
                 ApiStatus.DONE ->  View.GONE
                 ApiStatus.ERROR -> View.GONE
             }
+            bind.swipeRefresh.isRefreshing = false
         }
     }
 

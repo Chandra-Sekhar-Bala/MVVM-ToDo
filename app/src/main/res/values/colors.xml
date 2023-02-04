@@ -9,4 +9,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="text_color">#393737</color>
     <color name="grey">#CEC5C5</color>
+
+    <color name="bg1">#F33131</color>
+    <color name="bg2">#6804B1</color>
+    <color name="bg3">#076823</color>
+    <color name="bg4">#FF0083</color>
+    <color name="bg5">#E21004B5</color>
+    <color name="bg6">#D38D02</color>
 </resources>

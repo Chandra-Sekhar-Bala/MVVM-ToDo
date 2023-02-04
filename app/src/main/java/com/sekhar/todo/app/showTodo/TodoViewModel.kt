@@ -1,34 +1,42 @@
 package com.sekhar.todo.app.showTodo
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sekhar.todo.app.repo.db.DAO
 import com.sekhar.todo.app.repo.db.TodoModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class TodoViewModel(private val database: DAO) : ViewModel() {
+    private val _todoData = MutableLiveData<List<TodoModel>>()
+    val todoData: LiveData<List<TodoModel>>
+        get() = _todoData
 
 
-    fun getAllTodo() : LiveData<List<TodoModel>> {
-
-        return runBlocking {
-            return@runBlocking getTodoFromDB()
+    val data = viewModelScope.async {
+        getAllTodo()
+    }
+    fun fetchTodos() {
+        viewModelScope.launch {
+            val todos = getAllTodo()
+            _todoData.value = todos.value
         }
-
     }
 
-    // get All todos from DO
-    private suspend fun getTodoFromDB(): LiveData<List<TodoModel>> {
-
-        return withContext(Dispatchers.IO){
-            val todo = database.getAll()
-            todo
+    private suspend fun getAllTodo(): LiveData<List<TodoModel>> {
+        return withContext(viewModelScope.coroutineContext) {
+            getTodoFromDB()
         }
+    }
 
+
+    // get All todos from DO
+    private fun getTodoFromDB(): LiveData<List<TodoModel>> {
+        return database.getAll()
     }
 
     // for public access
