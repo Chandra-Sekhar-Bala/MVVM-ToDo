@@ -12,6 +12,13 @@ Simple To-Do Android application using modern MVVM architecture and a motivation
 
 </p>
 
+### Watch Demo 
+
+<a href="https://youtube.com/shorts/tG56qY2irbk?feature=share">
+  <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/57448981/237409266-ff16d5e8-7c34-48a5-9162-b0f96589f29b.png" width="80" />
+</a>
+
+
 ## Tech Stack
   1. Kotlin
   2. Android
